@@ -33,8 +33,8 @@ app.route("/api/:date?")
         return;
       }
 
-      var dateUnix = parseInt(dateStr);
-      var date = new Date(dateUnix);
+      var date = new Date(!isNaN(dateStr) ? parseInt(dateStr) : Date.parse(dateStr));
+      var dateUnix = date.getTime();
       var utcStr = date.toUTCString();
       res.json({
         unix: dateUnix,
